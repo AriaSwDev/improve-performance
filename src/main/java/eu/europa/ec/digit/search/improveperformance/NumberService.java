@@ -2,10 +2,8 @@ package eu.europa.ec.digit.search.improveperformance;
 
 import static java.util.stream.Collectors.toList;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.springframework.stereotype.Service;
@@ -40,10 +38,40 @@ public class NumberService {
     }
 
     public Integer findSmallestDuplicateImproved(List<Integer> data) {
-        
-        throw new UnsupportedOperationException("Not implemented.");
+
+        Set<Integer> numbers = new HashSet<>();
+//      List<Integer> duplicates = new ArrayList<>();
+
+/*
+        // Test passed 10 or 11ms
+        for (int i = 0; i < data.size(); i++) {
+            if( !numbers.add( data.get(i) ) ) {
+                log.info("found duplicate {}", data.get(i));
+                duplicates.add( data.get(i) );
+            }
+        }
+
+        return duplicates.stream().sorted().findFirst().orElse(null);
+ */
+/*
+        // Test failed due to the time taken >= 16ms
+
+        for ( Integer i : data ) {
+            if( !numbers.add( i ) ) {
+                log.info("found duplicate {}", data.get(i));
+                duplicates.add( data.get(i) );
+            }
+        }
+*/
+        // Test passed 8 to 9ms, like a further 1 to 2 ms improvement is speed.
+
+        return data.stream()
+                .filter(n -> !numbers.add(n))
+                .collect(Collectors.toSet())
+                .stream().sorted().findFirst().orElse(null);
 
     }
+
 
     public List<Integer> generateData() {
 

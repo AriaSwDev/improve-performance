@@ -26,6 +26,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<version>1.18.30</version> <!-- needed for JDK > 15 -->
 		</dependency>
 
 		<dependency>
